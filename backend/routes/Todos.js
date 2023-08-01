@@ -10,12 +10,11 @@ router.get("/", async (req, res) => {
 //Create new Todo
 router.post("/new", async (req, res) => {
   const newTodo = new Todo(
-    //req.body //what the Vue app is sending
-
-    {
-      author: "Flanders",
-      todo: "Go to Canada",
-    }
+    req.body // What the Vue App is sending
+    /* { // pass in body content to be stored in DB
+        author:"Flanders", 
+        todo:"Go to canada"
+      } */
   );
   const savedTodo = await newTodo.save(); // mongo save method
   res.json(savedTodo); // respond with json to our post endpoint
@@ -33,11 +32,14 @@ router.delete("/delete/:id", async (req, res) => {
 });
 //Update a todo by ID
 router.put("/update/:id", async (req, res) => {
-  const tUpdate = await Todo.updateOne({
-    //{_id: req.params.id}, {$set:req.body}
-    author: "FBart",
-    todo: "Skating",
-  });
+  const tUpdate = await Todo.updateOne(
+    { _id: req.params.id },
+    //{$set:req.body}
+    {
+      author: "Bart",
+      todo: "Skating",
+    }
+  );
 
   res.json(tUpdate);
 });
