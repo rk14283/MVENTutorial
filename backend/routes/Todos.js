@@ -10,7 +10,9 @@ router.get("/", async (req, res) => {
 //Create new Todo
 router.post("/new", async (req, res) => {
   const newTodo = new Todo(
-    req.body // What the Vue App is sending
+    req.body
+
+    // What the Vue App is sending
     /* { // pass in body content to be stored in DB
         author:"Flanders", 
         todo:"Go to canada"
